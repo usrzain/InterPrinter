@@ -1,12 +1,12 @@
 # InterPrinter
 make a online printing shop 
 
-# TO START THE EXPRESS SERVER RUN THIS COMMAND 
+# To start the express server run this command 
  npm run devStart
 
-# TO START THE VITE APP 
-# FIRST NAVIGATE TO 'front' directory 
+# To Start The Vite App 
+# First Navigate To 'front' Directory 
  cd front 
 
-# THEN RUN THIS COMMAND TO START THE SERVER 
+# Then Run This Command To Start The Server 
  npm run dev 
