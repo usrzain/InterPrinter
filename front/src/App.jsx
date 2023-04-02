@@ -7,7 +7,7 @@ import User from './Components/User';
 import AdminAU from './Components/AdminAU';
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <BrowserRouter>
