@@ -38,7 +38,7 @@ const SignUp = () => {
 
 
   return (
-    <div className='text-xl border-blue-900 border-2 py-4 text-center flex justify-center h-screen items-center'>
+    <div className='text-xl border-blue-900 border-2 py-4 text-center flex flex-col justify-center h-screen items-center'>
        <form className='text-sm flex flex-col w-1/2 ' onSubmit={handleSubmit}>
            <input type="text" name="name" id="" className='border-2 my-4 ' placeholder='Enter Name ' value={signUp.name} onChange={handleChange} />
             
@@ -51,7 +51,7 @@ const SignUp = () => {
 
        </form>
 
-       <button> <a href='/login'> Login </a>  </button>
+       <button className='mt-4 p-2 bg-green-600  rounded-lg'> <a href='/login'> Login ? </a>  </button>
     </div>
   )
 }

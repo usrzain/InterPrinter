@@ -5,8 +5,6 @@ import * as Realm from 'realm-web'
 import fileDownload from 'js-file-download';
 
 
-
-
 const AdminAU = () => {
     const location = useLocation(); 
     const USER_ID  =  location.state.USR_ID;
@@ -52,7 +50,7 @@ const AdminAU = () => {
 
                         const file_name = file.fileName;
                         const file_type = file.mimeType;
-                        
+                        console.log(file.file.buffer)
                         fileDownload(file.file.buffer, `${file.fileName}`);
 
                     }

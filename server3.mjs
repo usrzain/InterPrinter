@@ -238,24 +238,30 @@ App.get('/login/fileDownload/:id', async(req,res)=>{
               res.status(404).send(' File Not Found ')
             }
 
-            const ArrayBuffer = FILE.file.buffer;
-            const bufferData = Buffer.from(ArrayBuffer);
-            const base64Data = bufferData.toString('base64');
+            const ArrayBuffer = FILE.file;
+            // const bufferData = Buffer.from(ArrayBuffer);
+            // const base64Data = bufferData.toString('base64');
+            const binaryData = new Uint8Array(ArrayBuffer);
+            console.log(ArrayBuffer.buffer.byteLength)
+            console.log(binaryData)
 
-            
+            res.send({DATA: binaryData, FILE_NAME:FILE.fileName , FILE_TYPE:FILE.mimeType })
             // Set the Content-Type header to the appropriate MIME type for the file
             
-            res.setHeader('Content-Type', `${FILE.mimeType}`);
+            // res.setHeader('Content-Type', `${FILE.mimeType}`);
 
             // // Set the Content-Disposition header to force download
           
-            res.setHeader('Content-disposition', 'attachment; filename=' + FILE.fileName);
+            // res.setHeader('Content-disposition', 'attachment; filename=' + FILE.fileName);
 
 
 
-            // res.send({'DATA':bufferData, 'DATA_FILE_NAME': FILE.fileName, 'DATA_MIME': FILE.mimeType, })
-            res.send({'DATA':bufferData, 'DATA_FILE_NAME': FILE.fileName, 'DATA_MIME': FILE.mimeType, })
-            console.log(base64Data)
+  
+            // res.send({'DATA':ArrayBuffer, 'DATA_FILE_NAME': FILE.fileName, 'DATA_MIME': FILE.mimeType, })
+
+            // console.log(ArrayBuffer)
+
+            
           
           }catch (error) {
             res.statusCode = 500;
@@ -271,28 +277,24 @@ App.delete('/login/fileDelete/:id', async(req,res)=>{
   console.log(id_To_Delete)
   try{
 
-    
-  // const result = await File.findByIdAndRemove(id);
-    
-    // Set the Content-Type header to the appropriate MIME type for the file
+   await  File.deleteOne({ _id: id_To_Delete })
+     .then(result=>{
+      console.log(`${result.deletedCount} document(s) deleted`);
+      res.sendStatus(204)
+     })
+     .catch(err => {
+      console.error(err);
+    });
    
-  
-
-    // // Set the Content-Disposition header to force download
-
-    // res.send({'DATA':bufferData, 'DATA_FILE_NAME': FILE.fileName, 'DATA_MIME': FILE.mimeType, })
     
-    // if (!result) {
-    //   return res.status(404).send('Data not found');
-    // }
+   
+    
 
-    // Return a success message and the deleted data
-    // res.send({ message: 'Data deleted successfully', data: result });
+   
    
    
   }catch (error) {
-    // res.statusCode = 500;
-    // res.end(error);
+   
     console.log(error)
   }
 })

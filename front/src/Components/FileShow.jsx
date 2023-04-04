@@ -1,7 +1,9 @@
 import React, { useState} from 'react';
 import axios from 'axios';
-import JsFileDownloader from 'js-file-download';
 
+import fileDownload from 'js-file-download';
+import { saveAs } from 'file-saver';
+import * as Realm from 'realm-web'
 
 
 
@@ -10,6 +12,11 @@ export default function  FileShow(props){
   const [ file_Chossen, setFileChoosen ] = useState(null);
   const [ uploadStatus, setUploadStatus ] = useState(0)
   const { userEmailAddres, userName } =props;
+  const REALM_APP_ID ='fileuploadapp-feuma';
+  const app = new Realm.App({ id: REALM_APP_ID  });
+  const credentials =  Realm.Credentials.anonymous();
+
+
 
   const File_Upload_Handler = (e)=>{
      
@@ -53,34 +60,30 @@ export default function  FileShow(props){
     const download = async (event)=>{
 
         const download_ID = event.target.id
-
-       await axios.get(`http://localhost:3001/login/fileDownload/${download_ID}`)
-         .then((res)=> {
-
-
-          let { DATA, DATA_FILE_NAME, DATA_MIME,  } = res.data;
-
-          console.log(DATA_MIME, DATA_FILE_NAME, DATA)
-
-
-            new JsFileDownloader(DATA, DATA_FILE_NAME , DATA_MIME).download();
-
-
-         })
         
+        
+        const user = await app.logIn(credentials);
+        const allusers = await user.functions.getSingleFile(`${download_ID}`);
+        console.log(allusers.fileName)
+        fileDownload(allusers.file.buffer, `${allusers.fileName}`);
 
 
   
 
-        console.log(event.target.id)
+     
     }
 
-    const delete_File = async (e)=>{
-
-      const delete_Id = e.target.id;
-      await axios.delete(`http://localhost:3001/login/fileDelete/${delete_Id}`)
-        
+    const deleteFile = async (event)=>{
+        const Delete_id = event.target.id;
+        console.log(Delete_id)
+        await axios.delete(`http://localhost:3001/login/fileDelete/${Delete_id}`)
+         .then((res)=>{
+          if(res.status === 204){
+            alert('Deleted ')
+          }
+         })
     }
+  
 
   return (
     <div className='bg-blue-500 h-screen flex flex-col text-white'>
@@ -118,7 +121,7 @@ export default function  FileShow(props){
                              <button onClick={download} id={file.FILE_ID} className='cursor-pointer'> Download </button>
             </td>
             <td className='text-center'>
-                            <button id={file.FILE_ID} onClick={delete_File} className='bg-red-700 border-2 border-red-500 cursor-pointer'> Delete </button>
+                            <button onClick={deleteFile} id={file.FILE_ID}  className='bg-red-700 border-2 border-red-500 cursor-pointer'> Delete </button>
             </td>
           </tr>
   
