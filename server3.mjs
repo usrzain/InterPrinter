@@ -59,23 +59,6 @@ const userSchema = new mongoose.Schema({
 
 const USER = mongoose.model('Users', userSchema);
 
-//  ==============================
-
-
-// =============  File Schema   ========
-// const fileSchema = new mongoose.Schema({
-//   email_It_Belongs: String,
-//   file: Buffer,
-//   fileName: String,
-//   mimeType: String,
-//   uploadDate:String
-
-// });
-
-
-// const File = mongoose.model('fileAllDATA', fileSchema);
-// =====================================
-
 
 const upload = multer();
 
@@ -93,10 +76,12 @@ App.post('/login/:email/upload', upload.array('fileCollection', 10) , async (req
   var fileCollection = req.files;
 
   var email_Typed = req.body.userEmailAddres;
+  var print_Type = req.body.printType
   let newDate = new Date()
   let date = newDate.getDate();
   let month = newDate.getMonth() + 1;
   let year = newDate.getFullYear();
+  var time = newDate.getHours() + ":" + newDate.getMinutes() + ':' + newDate.getHours() >= 12 ? 'pm' : 'am';
 
   let DATE = `${date}-${month}-${year}`
  
@@ -113,7 +98,8 @@ App.post('/login/:email/upload', upload.array('fileCollection', 10) , async (req
               file: eachFile.buffer,
               fileName: eachFile.originalname,
               mimeType: mime.lookup(eachFile.originalname),
-              uploadDate:DATE
+              uploadDate:DATE,
+              printType:print_Type
             
           });
 
@@ -364,33 +350,4 @@ App.post('/login', async(req,res)=>{
 })
 
 
-//    //   creting the route for admin 
 
-App.get('/admin/all-users', async(req,res)=>{
-  const all_Users = signUpUser.find({});
-  all_Users.then((docs) => {
-
-    res.setHeader('Content-Type', 'text/plain');
-    res.json(docs)
-  }).catch((err) => {
-    console.error(err);
-  });
-
-    
-})
-
-
-//  ---- creatinf route for getting all files which each user has uploded 
-App.get('/admin/all-users/:usr/all-files', async(req,res)=>{
-
-  
-  // all_Users.then((docs) => {
-
-  //   res.setHeader('Content-Type', 'text/plain');
-  //   res.json(docs)
-  // }).catch((err) => {
-  //   console.error(err);
-  // });
-
-    
-})

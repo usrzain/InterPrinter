@@ -45,16 +45,24 @@ const Login = () => {
 
 
   return (
-    <div className='text-xl border-blue-900 border-2 py-4 text-center flex justify-center h-screen items-center'>
-       <form className='text-sm flex flex-col w-1/2 ' onSubmit={handleSubmit}>
-            <input type="email" name="email" id="" placeholder='Enter E mail' value={loginData.email} className='border-2 my-4 ' onChange={handleChange} />
-            <input type="password" name="password" id="" placeholder='Enter password' value={loginData.password} className='border-2 my-4 ' onChange={handleChange} />
+
+    <>
+        <div className='text-xl border-blue-900 border-2 py-4 text-center flex flex-col justify-center h-screen items-center'>
+          <form className='text-sm flex flex-col w-1/2 ' onSubmit={handleSubmit}>
+                <input type="email" name="email" id="" placeholder='Enter E mail' value={loginData.email} className='border-2 my-4 ' onChange={handleChange} />
+                <input type="password" name="password" id="" placeholder='Enter password' value={loginData.password} className='border-2 my-4 ' onChange={handleChange} />
 
 
-            <button type='submit'  className='p-2 bg-blue-800 '>Login</button>
-       </form>
+                <button type='submit'  className='p-2 bg-blue-800 '>Login</button>
+          </form>
+
+          <p className='mt-20'> Don't have an account ? <a href='/sign-up' className='cursor-pointer p-1 bg-gray-400  rounded-2xl'>Click here</a> to sign up</p>
+          
+        </div>
+
       
-    </div>
+
+    </>
   )
 }
 

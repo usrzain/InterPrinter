@@ -26,7 +26,7 @@ const SignUp = () => {
          .then((res)=>{
            if(res.status === 201 ){
           const data =  {name: signUp.name, email: signUp.email }
-           navigate('/login')
+           navigate('/')
            }
          })
     }
@@ -51,7 +51,7 @@ const SignUp = () => {
 
        </form>
 
-       <button className='mt-4 p-2 bg-green-600  rounded-lg'> <a href='/login'> Login ? </a>  </button>
+       <button className='mt-4  cursor-pointer  rounded-lg'> Already have a account ?  click <a href='/' className='bg-green-600 p-1 rounded-2xl cursor-pointer'> Login  </a>  </button>
     </div>
   )
 }

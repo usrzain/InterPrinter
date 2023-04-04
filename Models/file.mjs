@@ -5,7 +5,8 @@ const fileSchema = new mongoose.Schema({
     file: Buffer,
     fileName: String,
     mimeType: String,
-    uploadDate:String
+    uploadDate:String,
+    printType:String
   
   });
 

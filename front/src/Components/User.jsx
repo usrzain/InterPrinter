@@ -47,6 +47,7 @@ const User = (props) => {
        
          
         <div>
+          
           {usr_Data_For_Email != null ?  <FileShow fileList={usr_Data_For_Email} userEmailAddres ={usr_Email} userName ={usr_Name_For_Email} /> : <h1> Loading...... </h1>}
         </div>
         
