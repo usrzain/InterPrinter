@@ -1,15 +1,18 @@
 # InterPrinter
 # make a online printing shop
 
+# First install all dependencies by running this command 
+  npm install
+
 # To start the express server run this command
-npm run devStart
+  npm run devStart
 
 # To Start The Vite App
 # First Navigate To 'front' Directory
-cd front
+  cd front
 
 # Then Run This Command To Start The Server
-npm run dev
+  npm run dev
 
 ---------------------------------------------------
 
@@ -23,7 +26,7 @@ npm run dev
  
  # TECH USED 
  
- js-fileDonwloader 
- axios 
- multer ( for backend ) 
+ =>  js-fileDonwloader 
+ =>  axios 
+ =>  multer ( for backend ) 
  
